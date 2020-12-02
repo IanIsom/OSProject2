@@ -1,40 +1,20 @@
 package osproject2;
 
 
-import gameInterface.CharacterSelectControl;
-
 import ocsf.client.AbstractClient;
-
 import java.util.ArrayList;
-
-import gameInterface.*;
-import gameInterface.CharacterData;
-import gameInterface.Error;
-import gameInterface.GameLobbyControl;
-import gameInterface.P1GameArenaControl;
-import gameInterface.P2GameArenaControl;
 import ocsf.client.AbstractClient;
 
 
 public class GameClient extends AbstractClient
 {
 	// Private data fields for storing the GUI controllers.
-	private LoginControl loginControl;
-	private CreateAccountControl createAccountControl;
+
 	private CharacterSelectControl characterSelectControl;
 	private GameLobbyControl gameLobbyControl;
 	private CharacterData data;
 
 
-	// Setters for the GUI controllers.
-	public void setLoginControl(LoginControl loginControl)
-	{
-		this.loginControl = loginControl;
-	}
-	public void setCreateAccountControl(CreateAccountControl createAccountControl)
-	{
-		this.createAccountControl = createAccountControl;
-	}
 
 	public void setCharacterSelectControl(CharacterSelectControl characterSelectControl) {
 		this.characterSelectControl = characterSelectControl;
