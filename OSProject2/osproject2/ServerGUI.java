@@ -1,12 +1,10 @@
+package osproject2;
 
 
 import java.awt.*;
 import javax.swing.*;
-import database.Database;
-import gameInterface.GameServer;
 import java.awt.event.*;
 import java.io.IOException;
-import java.sql.SQLException;
 
 public class ServerGUI extends JFrame
 {
@@ -24,16 +22,6 @@ public class ServerGUI extends JFrame
   // Constructor for the server GUI.
 	public ServerGUI()
 	{	
-	try {
-		Database db = new Database();
-		//server.setDatabase(db);
-	} catch (SQLException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} catch (IOException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
 	
 	
 	

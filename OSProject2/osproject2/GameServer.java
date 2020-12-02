@@ -2,11 +2,7 @@ package osproject2;
 
 import java.awt.*;
 import javax.swing.*;
-import GUI.LoginData;
-import clientSubSystem.CreateAccountData;
-import database.Database;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 import ocsf.server.AbstractServer;
@@ -23,7 +19,7 @@ public class GameServer extends AbstractServer
 	private int numConnections; //UPDATE
 	public int numlookingForGame;
 	public ArrayList<ConnectionToClient> queue = new ArrayList<ConnectionToClient>();
-	public ArrayList<CharacterData> charSelected = new ArrayList<CharacterData>();
+	//public ArrayList<CharacterData> charSelected = new ArrayList<CharacterData>();
 	private boolean gameActive;
 	private int turnCount;
 
@@ -106,6 +102,7 @@ public class GameServer extends AbstractServer
 	// When a message is received from a client, handle it.
 	public void handleMessageFromClient(Object arg0, ConnectionToClient arg1)
 	{
+		/*
 
 
 		else if(arg0 instanceof CharacterData) {
@@ -199,6 +196,7 @@ public class GameServer extends AbstractServer
 					e.printStackTrace();
 				}
 			}
+			
 
 
 
@@ -244,6 +242,7 @@ public class GameServer extends AbstractServer
 				}
 			}
 		}
+		*/
 	}
 
 
