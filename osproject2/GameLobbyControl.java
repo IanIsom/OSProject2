@@ -73,6 +73,11 @@ public class GameLobbyControl implements ActionListener{
 		    gLobby.setFinding();
 	  }
 	  
+	  public void undoFinding() throws InterruptedException {
+		    GameLobbyPanel gLobby = (GameLobbyPanel)container.getComponent(2);
+		    gLobby.undoFinding();
+	  }
+	  
 	  public void setData(ArrayList<CharacterData> data) {
 		  this.data = data;
 	  }

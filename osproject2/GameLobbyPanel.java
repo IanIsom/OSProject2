@@ -21,6 +21,10 @@ public class GameLobbyPanel extends JPanel {
 		lblFinding.setText("Searching...");
 	}
 
+	public void undoFinding()
+	{
+		lblFinding.setText("");
+	}
 
 	public GameLobbyPanel(GameLobbyControl gl) {
 		

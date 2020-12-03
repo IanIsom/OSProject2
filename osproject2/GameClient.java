@@ -85,7 +85,14 @@ public class GameClient extends AbstractClient
 				P2GameArenaControl.gameOver(arg0);
 			}
 			else if(message.equals("Start Over")) {
-				initalControl.startOver();
+				try {
+					gameLobbyControl.undoFinding();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				InitialControl.startOver();
+
 				
 			}
 		}

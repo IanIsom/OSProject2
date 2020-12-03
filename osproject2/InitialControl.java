@@ -7,7 +7,7 @@ import java.awt.event.*;
 public class InitialControl implements ActionListener
 {
   // Private data field for storing the container.
-  private JPanel container;
+  private static JPanel container;
   private GameClient client;
   // Constructor for the initial controller.
   public InitialControl(JPanel container, GameClient client)
@@ -32,7 +32,8 @@ public class InitialControl implements ActionListener
     
   }
   
-  public void startOver() {
+  public static void startOver() {
+	  System.out.println("HIt start over again");
       CardLayout cardLayout = (CardLayout)container.getLayout();
       cardLayout.show(container, "1");
   }

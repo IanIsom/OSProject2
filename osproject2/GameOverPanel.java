@@ -2,12 +2,10 @@ package osproject2;
 
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
-
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
+
 
 public class GameOverPanel extends JPanel {
 	private JLabel lblWinner;

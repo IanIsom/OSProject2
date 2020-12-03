@@ -102,6 +102,8 @@ public class GameServer extends AbstractServer
 	// When a message is received from a client, handle it.
 	public void handleMessageFromClient(Object arg0, ConnectionToClient arg1)
 	{
+		
+		
 
 		if(arg0.equals("Play Again")) {
 			try {
@@ -116,6 +118,10 @@ public class GameServer extends AbstractServer
 		else if(arg0 instanceof CharacterData) {
 
 			CharacterData data = (CharacterData)arg0;
+			
+			if(charSelected.size() >= 2) {
+				charSelected.clear();
+			}
 
 			charSelected.add(data);
 
@@ -131,8 +137,7 @@ public class GameServer extends AbstractServer
 		}
 		else if(arg0 instanceof GameLobbyData) {
 			if(queue.size() >= 2) {
-				queue.remove(queue.get(0));
-				queue.remove(queue.get(1));
+				queue.clear();
 			}
 			
 			log.append(arg1.getId() + " is currently searching for a game\n");

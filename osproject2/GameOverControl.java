@@ -1,11 +1,12 @@
 package osproject2;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 
 import javax.swing.JPanel;
 
-public class GameOverControl {
+public class GameOverControl implements ActionListener {
 	private static JPanel container;
 	private GameClient client;
 
