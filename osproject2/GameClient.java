@@ -13,6 +13,8 @@ public class GameClient extends AbstractClient
 	private CharacterSelectControl characterSelectControl;
 	private GameLobbyControl gameLobbyControl;
 	private CharacterData data;
+	private GameOverControl gameOverControl;
+	private InitialControl initalControl;
 
 
 
@@ -23,6 +25,11 @@ public class GameClient extends AbstractClient
 	public void setGameLobbyControl(GameLobbyControl gameLobbyControl) {
 		this.gameLobbyControl = gameLobbyControl;
 	}
+	
+	public void setGameOverControl(GameOverControl gameOverControl) {
+		this.gameOverControl = gameOverControl;
+	}
+	
 
 
 
@@ -41,18 +48,7 @@ public class GameClient extends AbstractClient
 			// Get the text of the message.
 			String message = (String)arg0;
 
-			// If we successfully logged in, tell the login controller.
-			if (message.equals("LoginSuccessful"))
-			{
-				loginControl.loginSuccess();
-			}
-
-			// If we successfully created an account, tell the create account controller.
-			else if (message.equals("CreateAccountSuccessful"))
-			{
-				createAccountControl.createAccountSuccess();
-			}
-			else if (message.equals("Player1 Found"))
+			if (message.equals("Player1 Found"))
 			{
 				try {
 					gameLobbyControl.finding();
@@ -77,26 +73,23 @@ public class GameClient extends AbstractClient
 					e.printStackTrace();
 				}
 			}
-		}
-
-		// If we received an Error, figure out where to display it.
-		else if (arg0 instanceof Error)
-		{
-			// Get the Error object.
-			Error error = (Error)arg0;
-
-			// Display login errors using the login controller.
-			if (error.getType().equals("Login"))
+			else if (message.equals("Player 1 Wins"))
 			{
-				loginControl.displayError(error.getMessage());
+				P1GameArenaControl.gameOver(arg0);
+				P2GameArenaControl.gameOver(arg0);
 			}
-
-			// Display account creation errors using the create account controller.
-			else if (error.getType().equals("CreateAccount"))
+			else if (message.equals("Player 2 Wins"))
 			{
-				createAccountControl.displayError(error.getMessage());
+				System.out.println("HIT THE CLIENT");
+				P1GameArenaControl.gameOver(arg0);
+				P2GameArenaControl.gameOver(arg0);
+			}
+			else if(message.equals("Start Over")) {
+				initalControl.startOver();
+				
 			}
 		}
+
 		else if(arg0 instanceof CharacterData) {
 			characterSelectControl.CharacterSelectSuccess();
 

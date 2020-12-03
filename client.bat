@@ -1,0 +1,1 @@
+java -cp .;ocsf.jar osproject2.GameGUI

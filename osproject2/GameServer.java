@@ -19,7 +19,7 @@ public class GameServer extends AbstractServer
 	private int numConnections; //UPDATE
 	public int numlookingForGame;
 	public ArrayList<ConnectionToClient> queue = new ArrayList<ConnectionToClient>();
-	//public ArrayList<CharacterData> charSelected = new ArrayList<CharacterData>();
+	public ArrayList<CharacterData> charSelected = new ArrayList<CharacterData>();
 	private boolean gameActive;
 	private int turnCount;
 
@@ -102,7 +102,15 @@ public class GameServer extends AbstractServer
 	// When a message is received from a client, handle it.
 	public void handleMessageFromClient(Object arg0, ConnectionToClient arg1)
 	{
-		/*
+
+		if(arg0.equals("Play Again")) {
+			try {
+				arg1.sendToClient("Start Over");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 
 
 		else if(arg0 instanceof CharacterData) {
@@ -120,9 +128,13 @@ public class GameServer extends AbstractServer
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-
 		}
 		else if(arg0 instanceof GameLobbyData) {
+			if(queue.size() >= 2) {
+				queue.remove(queue.get(0));
+				queue.remove(queue.get(1));
+			}
+			
 			log.append(arg1.getId() + " is currently searching for a game\n");
 
 			numlookingForGame++;
@@ -162,9 +174,7 @@ public class GameServer extends AbstractServer
 		else if(arg0.equals("Attack1")) {
 			System.out.println("Player 1 Attacks!\n");
 			
-			if (charSelected.get(1).getHp() <= 0) {
-				System.out.println("Player 1 Wins! \n");
-			}
+
 			
 			//high and low
 			int min = 0;
@@ -182,6 +192,30 @@ public class GameServer extends AbstractServer
 				dmg *= 100.00;
 				//tell the log that he did action and dmg
 				log.append(arg1.getId() + " has attacked Player 2 for " + dmg/100 + "\n");
+				
+				charSelected.get(1).setHp(charSelected.get(1).getHp() - dmg/100);
+				System.out.println("Player's 2 hp is now " + charSelected.get(1).getHp());
+				
+				if (charSelected.get(1).getHp() <= 0) {
+					System.out.println("Player 1 Wins! \n");
+					try {
+						queue.get(0).sendToClient("Player 1 Wins");
+						queue.get(1).sendToClient("Player 1 Wins");
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				else if(charSelected.get(0).getHp() <= 0) {
+					System.out.println("Player 2 Wins! \n");
+					try {
+						queue.get(0).sendToClient("Player 2 Wins");
+						queue.get(1).sendToClient("Player 2 Wins");
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
 
 				//player1 turn is up
 				charSelected.get(0).setTurn(true);
@@ -205,10 +239,6 @@ public class GameServer extends AbstractServer
 		else if(arg0.equals("Attack2")) {
 			System.out.println("Player 2 Attacks!\n");
 			
-			if (charSelected.get(0).getHp() <= 0.00) {
-				System.out.println("Player 2 Wins! \n");
-				
-			}
 			
 			//high and low
 			int min = 0;
@@ -227,22 +257,51 @@ public class GameServer extends AbstractServer
 
 				//tell the log that he did action and dmg
 				log.append(arg1.getId() + " has attacked Player 1 for " + dmg + "\n");
+				
+				charSelected.get(0).setHp(charSelected.get(0).getHp() - dmg);
+				System.out.println("Player's 1 hp is now " + charSelected.get(0).getHp());
+				
+
 
 				//player1 turn is up
 				charSelected.get(1).setTurn(true);
 				charSelected.get(0).setTurn(false);
 
-				//send dmg to client
-				try {
-					queue.get(1).sendToClient(dmg);
-					queue.get(0).sendToClient(-dmg);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				if (charSelected.get(1).getHp() <= 0) {
+					System.out.println("Player 1 Wins! \n");
+					try {
+						queue.get(0).sendToClient("Player 1 Wins");
+						queue.get(1).sendToClient("Player 1 Wins");
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
 				}
+				else if(charSelected.get(0).getHp() <= 0) {
+					System.out.println("Player 2 Wins! \n");
+					try {
+						queue.get(0).sendToClient("Player 2 Wins");
+						queue.get(1).sendToClient("Player 2 Wins");
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				else{
+					//send dmg to client
+					try {
+						queue.get(1).sendToClient(dmg);
+						queue.get(0).sendToClient(-dmg);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+				}
+
 			}
-		}
-		*/
+		} 
 	}
 
 

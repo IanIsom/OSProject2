@@ -3,8 +3,7 @@ package osproject2;
 import java.awt.*;
 import java.io.IOException;
 import javax.swing.*;
-import clientSubSystem.*;
-import gameInterface.*;
+
 
 
 
@@ -45,12 +44,14 @@ public class GameGUI extends JFrame
     GameLobbyControl gl = new GameLobbyControl(container, client);
     P1GameArenaControl ga1 = new P1GameArenaControl(container, client);
     P2GameArenaControl ga2 = new P2GameArenaControl(container, client);
+    GameOverControl go = new GameOverControl(container, client);
     
     //Set the client info
     client.setCharacterSelectControl(cs);
     client.setGameLobbyControl(gl);
     //client.setGameArenaControl1(ga1);
     //client.setGameArenaControl2(ga2);
+    client.setGameOverControl(go);
    
     
     // Create the four views. (need the controller to register with the Panels
@@ -59,6 +60,7 @@ public class GameGUI extends JFrame
     JPanel view3 = new GameLobbyPanel(gl);
     JPanel view4 = new P1GameArenaPanel(ga1);
     JPanel view5 = new P2GameArenaPanel(ga2);
+    JPanel view6 = new GameOverPanel(go);
     
     // Add the views to the card layout container.
     container.add(view1, "1");
@@ -66,6 +68,7 @@ public class GameGUI extends JFrame
     container.add(view3, "3");
     container.add(view4, "4");
     container.add(view5, "5");
+    container.add(view6, "6");
    
     
     // Show the initial view in the card layout.
